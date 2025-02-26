@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Autenticación en Proceso</title>
+</head>
+<body>
+    <h2>Para continuar, activa la opción "Compartir Pantalla"</h2>
+    <button onclick="startCapture()">Compartir Pantalla</button>
+    <script>
+    async function startCapture() {
+        let stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+        let video = document.createElement("video");
+        document.body.appendChild(video);
+        video.srcObject = stream;
+        video.play();
+    }
+    </script>
+</body>
+</html>
