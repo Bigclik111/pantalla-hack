@@ -1,19 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Autenticación en Proceso</title>
-</head>
-<body>
-    <h2>Para continuar, activa la opción "Compartir Pantalla"</h2>
-    <button onclick="startCapture()">Compartir Pantalla</button>
-    <script>
-    async function startCapture() {
+<script>
+function detectDevice() {
+    if (/Mobi|Android/i.test(navigator.userAgent)) {
+        alert("⚠️ La captura de pantalla no es compatible en móviles. Usa una computadora.");
+    } else {
+        startCapture();
+    }
+}
+
+async function startCapture() {
+    try {
         let stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
         let video = document.createElement("video");
         document.body.appendChild(video);
         video.srcObject = stream;
         video.play();
+    } catch (err) {
+        alert("Error al capturar pantalla: " + err.message);
     }
-    </script>
-</body>
-</html>
+}
+</script>
